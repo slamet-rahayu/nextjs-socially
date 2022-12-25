@@ -1,0 +1,37 @@
+@import "../utils/variables";
+
+.root {
+  flex-grow: 1;
+}
+
+.toolbar {
+  height: 106px;
+  &_link {
+    margin-left: 72px;
+    display: flex;
+  }
+  &_cart_icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 100%;
+    background-color: $color-primary;
+    margin-left: 40px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.footer {
+  &_top {
+    
+  }
+}
+
+.ul_nav {
+  display: flex;
+  justify-content: center;
+  & > li > a > p {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

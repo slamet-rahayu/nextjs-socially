@@ -1,0 +1,72 @@
+.ccontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #395B64;
+}
+
+.content {
+  background-color: #2C3333;
+  border-radius: 10px;
+  padding: 40px 5px 40px 5px;
+}
+
+.btn_container {
+  // width: 300px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.btn {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 18px;
+  width: 65px;
+  height: 65px;
+  cursor: pointer;
+  border-radius: 5px;
+  &:hover {
+    background-color: #395B64;
+  }
+}
+
+.result {
+  border: none;
+  background: none;
+  font-size: 18px;
+  color: white;
+  text-align: right;
+  padding-right: 28px;
+  width: 100%;
+  margin-bottom: 20px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn_equal {
+  background-color: aqua !important;
+}
+
+.btn_primary {
+  color: white;
+}
+
+.btn_secondary {
+  color: white;
+}
+
+.btn_success {
+  color: white;
+}
+
+.btn_danger {
+  color: white;
+}
+
+.btn_warning {
+  color: white;
+}
