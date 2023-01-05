@@ -5,5 +5,5 @@ interface IContainer {
 }
 
 export default function Container({ children }: IContainer): React.ReactElement {
-  return <div className="max-w-sm mx-auto">{children}</div>;
+  return <div className="max-w-sm mx-auto pb-10">{children}</div>;
 }

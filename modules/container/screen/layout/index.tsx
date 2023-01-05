@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'modules/container/components/container';
+import BottomTab from 'modules/container/components/bottom-tab';
 
 interface IContainer {
   children: React.ReactNode;
@@ -8,8 +9,8 @@ interface IContainer {
 export default function ContainerModule({ children }: IContainer): React.ReactElement {
   return (
     <Container>
-      <p>container</p>
-      {children}
+      <div className="p-4">{children}</div>
+      <BottomTab />
     </Container>
   );
 }

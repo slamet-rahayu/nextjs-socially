@@ -17,7 +17,6 @@ const theme = createTheme({
   typography: {
     fontFamily: [
       'Nunito',
-      'Taviraj',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',
@@ -30,7 +29,7 @@ const theme = createTheme({
       '"Segoe UI Symbol"'
     ].join(','),
     body1: {
-      fontFamily: 'Taviraj'
+      fontFamily: 'Nunito'
     }
   }
 });
