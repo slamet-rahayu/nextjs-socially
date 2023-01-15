@@ -1,7 +1,7 @@
 import React from 'react';
 
-export interface INotifProps {
+export interface IHeaderProps {
   title?: String;
-  onBackClick?: () => void;
+  leftComponent?: React.ReactNode;
   rightComponent?: React.ReactNode;
 }

@@ -1,11 +1,17 @@
 const notifData = [
   {
-    title: 'David Followed you',
-    time: ''
-  },
-  {
-    title: 'Lucas Followed you',
-    time: ''
+    date: 'Today',
+    data: [
+      {
+        title: 'David Followed you',
+        thumb: '',
+        time: 'Just now'
+      },
+      {
+        title: 'Lucas Followed you',
+        time: 'Just now'
+      }
+    ]
   }
 ];
 
