@@ -1,12 +1,17 @@
 import { ContainerModule } from 'modules/container/screen';
-import { SearchComponent, StoryComponent, PostComponent } from 'modules/home/components';
+import { StoryComponent, PostComponent } from 'modules/home/components';
+import { SearhBar } from 'components';
 
 export default function HomeComponent() {
   return (
-    <ContainerModule>
-      <SearchComponent />
-      <StoryComponent />
-      <PostComponent />
-    </ContainerModule>
+    <>
+      <SearhBar withNotification />
+      <ContainerModule>
+        <div className="p-4">
+          <StoryComponent />
+          <PostComponent />
+        </div>
+      </ContainerModule>
+    </>
   );
 }

@@ -9,7 +9,7 @@ interface IContainer {
 export default function ContainerModule({ children }: IContainer): React.ReactElement {
   return (
     <Container>
-      <div className="p-4">{children}</div>
+      <div>{children}</div>
       <BottomTab />
     </Container>
   );

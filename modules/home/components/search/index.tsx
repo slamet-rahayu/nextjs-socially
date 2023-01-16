@@ -20,7 +20,7 @@ export default function SearchCompnent(): ReactElement {
           placeholder="Search..."
         />
       </div>
-      <button type="button" onClick={toggleNotif}>
+      <button type="button" onClick={toggleNotif} className="flex">
         <Image src={IconBell} alt="icon bell" />
       </button>
       <NotificationComp isOpen={notifOpen} onClose={toggleNotif} />

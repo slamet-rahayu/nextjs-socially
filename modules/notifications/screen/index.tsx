@@ -13,7 +13,7 @@ export default function NotificationComp({ isOpen, onClose }: INotifProps): Reac
   }
 
   return (
-    <div className="bg-white w-full h-screen fixed z-10 bottom-0 border max-w-sm">
+    <div className="bg-white w-full h-screen fixed z-10 bottom-0 border max-w-md">
       <Header
         title="Notifications"
         leftComponent={

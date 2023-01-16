@@ -1,6 +1,3 @@
-import React from 'react';
-import BottomTab from 'modules/container/components/bottom-tab';
+import { SocialMain } from 'modules/social/screen';
 
-export default function SocialPage(): React.ReactElement {
-  return <BottomTab />;
-}
+export default SocialMain;

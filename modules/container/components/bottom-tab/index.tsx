@@ -28,7 +28,7 @@ export default function BottomTab(): React.ReactElement {
 
   return (
     <div className="fixed w-full bottom-0 left-0 py-4 bg-white border-t">
-      <div className="max-w-sm mx-auto flex justify-around">
+      <div className="max-w-md mx-auto flex justify-around">
         {menuList.map((v) => (
           <button type="button" onClick={() => router.push(v.path)} key={v.path}>
             <Image src={router.asPath === v.path ? v.iconActive : v.icon} alt={v.path} />

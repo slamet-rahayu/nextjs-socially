@@ -6,7 +6,7 @@ export default function PostComponent() {
   return (
     <div>
       {Array.from(new Array(5).keys()).map((y) => (
-        <div className="rounded-xl bg-gray-50 p-4 mb-4" key={y}>
+        <div className="rounded-xl bg-gray-100 p-4 mb-4" key={y}>
           <div className="flex mb-2" id="user">
             <div className="w-[46px] h-[46px] rounded-full bg-slate-200 mr-2" />
             <div>
@@ -26,7 +26,7 @@ export default function PostComponent() {
                 {Array.from(new Array(3).keys()).map((v, k) => (
                   <div
                     className={`w-[22px] h-[22px] rounded-full bg-slate-200 ${
-                      k > 0 && 'ml-[-5px]'
+                      k > 0 && 'ml-[-7px]'
                     } border border-white`}
                     key={v}
                   />
