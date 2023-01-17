@@ -2,12 +2,14 @@ import { ReactElement, useState } from 'react';
 import { IconBell, IconSearch } from 'config/svgs';
 import Image from 'next/image';
 import NotificationComp from 'modules/notifications/screen';
+import cx from 'classnames';
 
 interface IProps {
   withNotification?: boolean;
+  isFixed?: boolean;
 }
 
-export default function SearchBar({ withNotification }: IProps): ReactElement {
+export default function SearchBar({ withNotification, isFixed }: IProps): ReactElement {
   const [notifOpen, setNotifOpen] = useState<boolean>(false);
 
   const toggleNotif = () => {
@@ -16,7 +18,19 @@ export default function SearchBar({ withNotification }: IProps): ReactElement {
 
   return (
     <div className="flex justify-center">
-      <div className="flex justify-between items-center fixed bg-white z-10 p-4 w-full max-w-md">
+      <div
+        className={cx(
+          'flex',
+          'justify-between',
+          'items-center',
+          'bg-white',
+          'z-10',
+          'p-4',
+          'w-full',
+          'max-w-md',
+          isFixed && 'fixed'
+        )}
+      >
         <div className="p-2 border rounded-2xl flex border-[#006175] w-[90%]">
           <Image src={IconSearch} alt="icon search" />
           <input
@@ -40,5 +54,6 @@ export default function SearchBar({ withNotification }: IProps): ReactElement {
 }
 
 SearchBar.defaultProps = {
-  withNotification: false
+  withNotification: false,
+  isFixed: true
 };

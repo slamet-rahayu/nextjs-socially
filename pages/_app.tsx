@@ -13,6 +13,7 @@ import theme from 'utils/theme';
 import createEmotionCache from 'utils/create-emotion-cache';
 import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-chat-elements/dist/main.css';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

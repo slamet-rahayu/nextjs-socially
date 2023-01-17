@@ -4,13 +4,21 @@ import BottomTab from 'modules/container/components/bottom-tab';
 
 interface IContainer {
   children: React.ReactNode;
+  withBottomTab?: boolean;
 }
 
-export default function ContainerModule({ children }: IContainer): React.ReactElement {
+export default function ContainerModule({
+  children,
+  withBottomTab
+}: IContainer): React.ReactElement {
   return (
     <Container>
       <div>{children}</div>
-      <BottomTab />
+      {withBottomTab && <BottomTab />}
     </Container>
   );
 }
+
+ContainerModule.defaultProps = {
+  withBottomTab: true
+};

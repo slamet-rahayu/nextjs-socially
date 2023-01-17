@@ -18,7 +18,7 @@ import {
 const menuList = [
   { path: '/', icon: IconHomeOutline, iconActive: IconHomeFlat },
   { path: '/social', icon: IconGraphOutline, iconActive: IconGraphFlat },
-  { path: '/post', icon: IconPlusOutline, iconActive: IconPlusFlat },
+  { path: '/create-post', icon: IconPlusOutline, iconActive: IconPlusFlat },
   { path: '/chats', icon: IconChatOutline, iconActive: IconChatFlat },
   { path: '/profile', icon: IconProfileOutline, iconActive: IconProfileFlat }
 ];

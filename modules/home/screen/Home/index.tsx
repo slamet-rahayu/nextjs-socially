@@ -1,5 +1,5 @@
 import { ContainerModule } from 'modules/container/screen';
-import { StoryComponent, PostComponent, CreatePostComponent } from 'modules/home/components';
+import { StoryComponent, PostComponent } from 'modules/home/components';
 import { SearhBar } from 'components';
 
 export default function HomeComponent() {
@@ -9,7 +9,6 @@ export default function HomeComponent() {
       <ContainerModule>
         <div className="p-4">
           <StoryComponent />
-          <CreatePostComponent />
           <PostComponent />
         </div>
       </ContainerModule>

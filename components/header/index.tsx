@@ -8,9 +8,9 @@ export default function Header({
 }: IHeaderProps): ReactElement {
   return (
     <div className="flex justify-between bg-white max-w-md items-center border-b py-2">
-      {leftComponent}
-      <p className="font-semibold">{title}</p>
-      {rightComponent}
+      {leftComponent || <div />}
+      <div className="font-semibold">{title}</div>
+      {rightComponent || <div />}
     </div>
   );
 }
