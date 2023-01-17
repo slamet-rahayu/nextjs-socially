@@ -15,9 +15,9 @@ export default function SearchBar({ withNotification }: IProps): ReactElement {
   };
 
   return (
-    <>
-      <div className="flex justify-between items-center fixed bg-white z-10 w-full p-4">
-        <div className="px-2 border rounded-2xl flex py-1 border-[#006175] w-[90%]">
+    <div className="flex justify-center">
+      <div className="flex justify-between items-center fixed bg-white z-10 p-4 w-full max-w-md">
+        <div className="p-2 border rounded-2xl flex border-[#006175] w-[90%]">
           <Image src={IconSearch} alt="icon search" />
           <input
             type="text"
@@ -35,7 +35,7 @@ export default function SearchBar({ withNotification }: IProps): ReactElement {
         )}
       </div>
       <div className="pb-14" />
-    </>
+    </div>
   );
 }
 
