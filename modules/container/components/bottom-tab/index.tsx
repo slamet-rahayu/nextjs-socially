@@ -20,7 +20,7 @@ const menuList = [
   { path: '/social', icon: IconGraphOutline, iconActive: IconGraphFlat },
   { path: '/create-post', icon: IconPlusOutline, iconActive: IconPlusFlat },
   { path: '/chats', icon: IconChatOutline, iconActive: IconChatFlat },
-  { path: '/profile', icon: IconProfileOutline, iconActive: IconProfileFlat }
+  { path: '/my-profile', icon: IconProfileOutline, iconActive: IconProfileFlat }
 ];
 
 export default function BottomTab(): React.ReactElement {

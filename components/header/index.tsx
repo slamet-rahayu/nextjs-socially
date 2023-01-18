@@ -7,7 +7,7 @@ export default function Header({
   rightComponent
 }: IHeaderProps): ReactElement {
   return (
-    <div className="flex justify-between bg-white max-w-md items-center border-b py-2">
+    <div className="flex justify-between bg-white max-w-md items-center border-b py-4">
       {leftComponent || <div />}
       <div className="font-semibold">{title}</div>
       {rightComponent || <div />}

@@ -4,8 +4,10 @@ import { ContainerModule } from 'modules/container/screen';
 import { ChevronLeft, Add } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { MessageBox } from 'react-chat-elements';
+import { useRouter } from 'next/router';
 
 export default function ChatsOpenComponent(): ReactElement {
+  const router = useRouter();
   return (
     <ContainerModule withBottomTab={false}>
       <Header
@@ -16,7 +18,7 @@ export default function ChatsOpenComponent(): ReactElement {
           </div>
         }
         leftComponent={
-          <IconButton>
+          <IconButton onClick={() => router.back()}>
             <ChevronLeft />
           </IconButton>
         }
@@ -24,7 +26,7 @@ export default function ChatsOpenComponent(): ReactElement {
       <div className="p-4">
         <div>
           <MessageBox
-            position="left"
+            position
             type="text"
             text="Aku sayang Banget sama kamu"
             date={new Date()}
@@ -44,7 +46,10 @@ export default function ChatsOpenComponent(): ReactElement {
           <button type="button" className="p-1 rounded-xl border-2 mr-2">
             <Add />
           </button>
-          <textarea className="w-full h-full outline-none" placeholder="Type a message" />
+          <textarea
+            className="w-full h-full outline-none resize-none"
+            placeholder="Type a message"
+          />
         </div>
       </div>
     </ContainerModule>

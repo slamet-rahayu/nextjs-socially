@@ -5,7 +5,7 @@ import { IconButton } from '@mui/material';
 export default function PostComponent() {
   return (
     <div>
-      {Array.from(new Array(5).keys()).map((y) => (
+      {[1, 2, 3, 4, 5].map((y) => (
         <div className="rounded-xl bg-gray-100 p-4 mb-4" key={y}>
           <div className="flex mb-2" id="user">
             <div className="w-[46px] h-[46px] rounded-full bg-slate-200 mr-2" />
