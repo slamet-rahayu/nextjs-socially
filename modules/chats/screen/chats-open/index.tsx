@@ -3,7 +3,6 @@ import Header from 'components/header';
 import { ContainerModule } from 'modules/container/screen';
 import { ChevronLeft, Add } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
-import { MessageBox } from 'react-chat-elements';
 import { useRouter } from 'next/router';
 
 export default function ChatsOpenComponent(): ReactElement {
@@ -24,22 +23,7 @@ export default function ChatsOpenComponent(): ReactElement {
         }
       />
       <div className="p-4">
-        <div>
-          <MessageBox
-            position
-            type="text"
-            text="Aku sayang Banget sama kamu"
-            date={new Date()}
-            status="received"
-          />
-          <MessageBox
-            position="right"
-            type="text"
-            text="Maaf ya, kamu terlalu baik buat aku"
-            date={new Date()}
-          />
-          <MessageBox position="left" type="text" text="😢" date={new Date()} status="received" />
-        </div>
+        <div />
       </div>
       <div className="p-4 fixed bottom-0 max-w-md w-full">
         <div className="flex items-center rounded-xl border-2 p-2">
