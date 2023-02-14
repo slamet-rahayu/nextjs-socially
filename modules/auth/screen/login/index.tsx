@@ -4,9 +4,11 @@ import { IconButton } from '@mui/material';
 import Header from 'components/header';
 import ContainerModule from 'modules/container/screen/layout';
 import { useRouter } from 'next/router';
+import { useLogin } from 'modules/auth/hooks';
 
 export default function LoginScreen(): React.ReactElement {
   const router = useRouter();
+  const { isLoading, isError, loginResponse, dispatchLogin } = useLogin();
   return (
     <ContainerModule withBottomTab={false}>
       <Header

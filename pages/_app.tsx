@@ -8,9 +8,9 @@ import { AppProps } from 'next/app';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import RProvider from 'redux-local/provider';
 import theme from 'utils/theme';
 import createEmotionCache from 'utils/create-emotion-cache';
+import { wrapper } from 'modules/container/redux/store';
 import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-chat-elements/dist/main.css';
@@ -27,11 +27,11 @@ type AppPropsWithLayout = AppProps & {
   emotionCache?: EmotionCache;
 };
 
-export default function MyApp(props: AppPropsWithLayout) {
+function MyApp(props: AppPropsWithLayout) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
-    <RProvider>
+    <>
       {getLayout(
         <CacheProvider value={emotionCache}>
           <Head>
@@ -44,6 +44,8 @@ export default function MyApp(props: AppPropsWithLayout) {
           </ThemeProvider>
         </CacheProvider>
       )}
-    </RProvider>
+    </>
   );
 }
+
+export default wrapper.withRedux(MyApp);
