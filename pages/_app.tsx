@@ -14,6 +14,7 @@ import { wrapper } from 'modules/container/redux/store';
 import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-chat-elements/dist/main.css';
+import '../wdyr';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
