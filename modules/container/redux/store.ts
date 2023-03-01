@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { nextReduxCookieMiddleware, wrapMakeStore } from 'next-redux-cookie-wrapper';
 import { Store } from 'redux';
 import { createWrapper } from 'next-redux-wrapper';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import authReducer from 'modules/auth/auth-reducer';
-import rootSaga from 'redux-local/sagas';
+import { rootSaga } from 'modules/container/redux/sagas';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -12,18 +13,25 @@ export interface SagaStore extends Store {
 const sagaMiddleware = createSagaMiddleware();
 
 const reducer = {
-  login: authReducer.loginReducer
+  login: authReducer.loginReducer,
+  auth: authReducer.authReducer
 };
 
-const makeStore = () => {
+const makeStore = wrapMakeStore(() => {
   const store = configureStore({
     reducer,
     devTools: process.env.NODE_ENV === 'development',
-    middleware: [sagaMiddleware]
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().prepend(
+        nextReduxCookieMiddleware({
+          subtrees: ['auth']
+        }),
+        sagaMiddleware
+      )
   });
   (store as SagaStore).sagaTask = sagaMiddleware.run(rootSaga);
   return store;
-};
+});
 
 export type AppStore = ReturnType<typeof makeStore>;
 export const wrapper = createWrapper<AppStore>(makeStore);

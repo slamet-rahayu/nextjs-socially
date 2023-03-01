@@ -4,3 +4,7 @@ export const loginInitialState = {
   loginRes: {},
   loginFailed: {}
 };
+
+export const authInitialState = {
+  auth: {}
+};

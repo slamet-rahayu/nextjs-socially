@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 import { createReducer, PayloadAction } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
 import {
   setLogin,
   setLoginSuccess,
   setLoginClear,
   setLoginFailed,
-  setLoginDone
+  setLoginDone,
+  setAuth,
+  setClearAuth
 } from './auth-action';
-import { loginInitialState } from './auth-initial-state';
+import { authInitialState, loginInitialState } from './auth-initial-state';
 
 const loginReducer = createReducer(loginInitialState, (builder) => {
   builder
@@ -30,8 +33,25 @@ const loginReducer = createReducer(loginInitialState, (builder) => {
     });
 });
 
-const authReducer = {
-  loginReducer
+const authReducer = createReducer(authInitialState, (builder) => {
+  builder
+    .addCase(setAuth, (state, action: any) => {
+      state.auth = action.payload.auth;
+    })
+    .addCase(setClearAuth, (state) => {
+      state.auth = authInitialState;
+    })
+    .addCase(HYDRATE, (state, action: any) => {
+      return {
+        ...state,
+        ...action.payload.auth
+      };
+    });
+});
+
+const authReducers = {
+  loginReducer,
+  authReducer
 };
 
-export default authReducer;
+export default authReducers;

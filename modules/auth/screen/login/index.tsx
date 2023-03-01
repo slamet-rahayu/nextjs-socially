@@ -1,14 +1,39 @@
-import React from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { ChevronLeft } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import Header from 'components/header';
 import ContainerModule from 'modules/container/screen/layout';
 import { useRouter } from 'next/router';
 import { useLogin } from 'modules/auth/hooks';
+import { ILoginReq } from 'modules/auth/interface/login';
+import { useSelector } from 'react-redux';
 
 export default function LoginScreen(): React.ReactElement {
   const router = useRouter();
+  const [form, setForm] = useState<ILoginReq>({
+    identifier: '',
+    password: ''
+  });
+
   const { isLoading, isError, loginResponse, dispatchLogin } = useLogin();
+
+  const { login } = useSelector((state: any) => state);
+
+  useEffect(() => {
+    console.log({ login });
+  }, [login]);
+
+  const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { name, value }
+    } = event;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const onLogin = () => {
+    dispatchLogin({ identifier: form.identifier, password: form.password });
+  };
+
   return (
     <ContainerModule withBottomTab={false}>
       <Header
@@ -27,7 +52,9 @@ export default function LoginScreen(): React.ReactElement {
           <div className="mb-6">
             <p className="mb-2 font-semibold text-sm">Username or email</p>
             <input
-              type="text"
+              type="email"
+              name="identifier"
+              onChange={onInputChange}
               placeholder="susu@moo.com"
               className="bg-gray-50 w-full p-3 rounded-xl outline-[#006175] border-2"
             />
@@ -36,6 +63,8 @@ export default function LoginScreen(): React.ReactElement {
             <p className="mb-2 font-semibold text-sm">Password</p>
             <input
               type="password"
+              name="password"
+              onChange={onInputChange}
               placeholder="Something secret"
               className="bg-gray-50 w-full p-3 rounded-xl outline-[#006175] border-2"
             />
@@ -46,7 +75,7 @@ export default function LoginScreen(): React.ReactElement {
         </div>
         <div className="fixed w-full flex justify-center px-6 left-0 bottom-12">
           <div className="max-w-md w-full px-4">
-            <button type="button" className="w-full py-3 rounded-xl bg-[#1C6758]">
+            <button type="button" className="w-full py-3 rounded-xl bg-[#1C6758]" onClick={onLogin}>
               <p className="font-semibold text-center text-white">Login</p>
             </button>
             <div className="flex font-semibold text-sm mt-3 justify-center">
