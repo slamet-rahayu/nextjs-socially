@@ -26,7 +26,7 @@ const loginReducer = createReducer(loginInitialState, (builder) => {
       state.loginFailed = action.payload;
     })
     .addCase(setLoginDone, (state) => {
-      state = { ...state, isLoading: false };
+      state.isLoading = false;
     })
     .addCase(setLoginClear, (state) => {
       state = loginInitialState;

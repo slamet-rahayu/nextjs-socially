@@ -1,12 +1,13 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { ChevronLeft } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
-import Header from 'components/header';
 import ContainerModule from 'modules/container/screen/layout';
 import { useRouter } from 'next/router';
 import { useLogin } from 'modules/auth/hooks';
 import { ILoginReq } from 'modules/auth/interface/login';
 import { useSelector } from 'react-redux';
+import { Input, Header, Loader } from 'components';
+import cx from 'classnames';
 
 export default function LoginScreen(): React.ReactElement {
   const router = useRouter();
@@ -18,10 +19,6 @@ export default function LoginScreen(): React.ReactElement {
   const { isLoading, isError, loginResponse, dispatchLogin } = useLogin();
 
   const { login } = useSelector((state: any) => state);
-
-  useEffect(() => {
-    console.log({ login });
-  }, [login]);
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -51,22 +48,20 @@ export default function LoginScreen(): React.ReactElement {
         <div className="mt-20">
           <div className="mb-6">
             <p className="mb-2 font-semibold text-sm">Username or email</p>
-            <input
+            <Input
               type="email"
               name="identifier"
               onChange={onInputChange}
               placeholder="susu@moo.com"
-              className="bg-gray-50 w-full p-3 rounded-xl outline-[#006175] border-2"
             />
           </div>
           <div className="mb-3">
             <p className="mb-2 font-semibold text-sm">Password</p>
-            <input
+            <Input
               type="password"
               name="password"
               onChange={onInputChange}
               placeholder="Something secret"
-              className="bg-gray-50 w-full p-3 rounded-xl outline-[#006175] border-2"
             />
           </div>
           <button type="button" className="text-[#1C6758] text-xs float-right">
@@ -74,9 +69,26 @@ export default function LoginScreen(): React.ReactElement {
           </button>
         </div>
         <div className="fixed w-full flex justify-center px-6 left-0 bottom-12">
-          <div className="max-w-md w-full px-4">
-            <button type="button" className="w-full py-3 rounded-xl bg-[#1C6758]" onClick={onLogin}>
-              <p className="font-semibold text-center text-white">Login</p>
+          <div className="max-w-md w-full">
+            <button
+              type="button"
+              disabled={isLoading}
+              className={cx(
+                'w-full',
+                'rounded-xl',
+                isLoading ? 'bg-gray-400' : 'bg-[#1C6758]',
+                'flex',
+                'justify-center',
+                'items-center',
+                'h-12'
+              )}
+              onClick={onLogin}
+            >
+              {isLoading ? (
+                <Loader />
+              ) : (
+                <p className="font-semibold text-center text-white">Login</p>
+              )}
             </button>
             <div className="flex font-semibold text-sm mt-3 justify-center">
               <p className="mr-1">Do not have an Account?</p>

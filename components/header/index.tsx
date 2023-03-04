@@ -1,5 +1,10 @@
-import { ReactElement } from 'react';
-import { IHeaderProps } from './interface';
+import { ReactElement, ReactNode } from 'react';
+
+interface IHeaderProps {
+  title?: string | ReactNode;
+  leftComponent?: ReactNode | null;
+  rightComponent?: ReactNode | null;
+}
 
 export default function Header({
   title,
@@ -14,3 +19,9 @@ export default function Header({
     </div>
   );
 }
+
+Header.defaultProps = {
+  title: '',
+  leftComponent: null,
+  rightComponent: null
+};
