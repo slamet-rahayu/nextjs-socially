@@ -16,3 +16,22 @@ export interface ILoginRes {
     updatedAt: string;
   };
 }
+
+export interface ILoginFailed {
+  data: null;
+  error: {
+    status: number;
+    name: string;
+    message: string;
+    details: object;
+  };
+}
+
+export interface ILoginState {
+  login: {
+    isLoading: boolean;
+    isError: boolean;
+    loginRes: ILoginRes;
+    loginFailed: ILoginFailed;
+  };
+}

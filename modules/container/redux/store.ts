@@ -17,7 +17,7 @@ const reducer = {
   auth: authReducer.authReducer
 };
 
-const makeStore = wrapMakeStore(() => {
+export const makeStore = wrapMakeStore(() => {
   const store = configureStore({
     reducer,
     devTools: process.env.NODE_ENV === 'development',

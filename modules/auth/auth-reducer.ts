@@ -36,10 +36,10 @@ const loginReducer = createReducer(loginInitialState, (builder) => {
 const authReducer = createReducer(authInitialState, (builder) => {
   builder
     .addCase(setAuth, (state, action: any) => {
-      state.auth = action.payload.auth;
+      state.userData = action.payload;
     })
     .addCase(setClearAuth, (state) => {
-      state.auth = authInitialState;
+      state.userData = authInitialState.userData;
     })
     .addCase(HYDRATE, (state, action: any) => {
       return {

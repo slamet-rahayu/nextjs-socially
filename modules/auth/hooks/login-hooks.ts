@@ -1,25 +1,27 @@
-import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLogin } from '../auth-action';
-import { ILoginReq } from '../interface/login';
+import { setLogin, setLoginClear } from '../auth-action';
+import { ILoginReq, ILoginState } from '../interface/login';
 
 export default function useLogin() {
   const dispatch = useDispatch();
 
   const {
-    login: { isLoading, isError, loginRes }
-  } = useSelector((state: any) => state);
+    login: { isLoading, loginFailed, loginRes }
+  } = useSelector((state: ILoginState) => state);
 
-  const dispatchLogin = (payload: ILoginReq) => dispatch(setLogin(payload));
+  const dispatchLogin = (payload: ILoginReq): void => {
+    dispatch(setLogin(payload));
+  };
 
-  useEffect(() => {
-    console.log({ isLoading });
-  }, [isLoading]);
+  const clearLoginState = (): void => {
+    dispatch(setLoginClear());
+  };
 
   return {
     isLoading,
-    isError,
+    loginFailed,
     loginRes,
-    dispatchLogin
+    dispatchLogin,
+    clearLoginState
   };
 }

@@ -6,5 +6,5 @@ export const loginInitialState = {
 };
 
 export const authInitialState = {
-  auth: {}
+  userData: {}
 };

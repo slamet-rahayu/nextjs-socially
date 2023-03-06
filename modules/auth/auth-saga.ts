@@ -8,6 +8,7 @@ import { SET_LOGIN } from './auth-constant';
 function* setLogin(action: PayloadAction<ILoginReq>) {
   try {
     const response: ILoginRes = yield call(loginApi, action.payload);
+    console.log({ response });
     yield put(setLoginSuccess(response));
     yield put(setAuth(response));
   } catch (error: any) {
