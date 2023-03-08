@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { setLogin, setLoginClear } from '../auth-action';
-import { ILoginReq, ILoginState } from '../interface/login';
+import { ILoginReq, ILoginState } from '../interface/auth';
 
 export default function useLogin() {
   const dispatch = useDispatch();

@@ -6,7 +6,6 @@ interface IContainer {
   children: React.ReactNode;
   withBottomTab?: boolean;
 }
-
 export default function ContainerModule({
   children,
   withBottomTab

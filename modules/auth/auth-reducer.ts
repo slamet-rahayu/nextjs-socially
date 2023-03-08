@@ -8,10 +8,15 @@ import {
   setLoginClear,
   setLoginFailed,
   setLoginDone,
+  setRegister,
+  setRegisterSuccess,
+  setRegisterClear,
+  setRegisterFailed,
+  setRegisterDone,
   setAuth,
   setClearAuth
 } from './auth-action';
-import { authInitialState, loginInitialState } from './auth-initial-state';
+import { authInitialState, loginInitialState, registerInitialState } from './auth-initial-state';
 
 const loginReducer = createReducer(loginInitialState, (builder) => {
   builder
@@ -33,6 +38,26 @@ const loginReducer = createReducer(loginInitialState, (builder) => {
     });
 });
 
+const registerReducer = createReducer(registerInitialState, (builder) => {
+  builder
+    .addCase(setRegister, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(setRegisterSuccess, (state, action: PayloadAction<any>) => {
+      state.registerRes = action.payload;
+    })
+    .addCase(setRegisterFailed, (state, action: PayloadAction<any>) => {
+      state.isError = true;
+      state.registerFailed = action.payload;
+    })
+    .addCase(setRegisterDone, (state) => {
+      state.isLoading = false;
+    })
+    .addCase(setRegisterClear, (state) => {
+      state = registerInitialState;
+    });
+});
+
 const authReducer = createReducer(authInitialState, (builder) => {
   builder
     .addCase(setAuth, (state, action: any) => {
@@ -51,6 +76,7 @@ const authReducer = createReducer(authInitialState, (builder) => {
 
 const authReducers = {
   loginReducer,
+  registerReducer,
   authReducer
 };
 

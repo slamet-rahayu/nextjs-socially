@@ -4,12 +4,10 @@ import { IconButton } from '@mui/material';
 import ContainerModule from 'modules/container/screen/layout';
 import { useRouter } from 'next/router';
 import { useLogin } from 'modules/auth/hooks';
-import { ILoginReq } from 'modules/auth/interface/login';
-import { Input, Header, Loader } from 'components';
-import cx from 'classnames';
+import { ILoginReq } from 'modules/auth/interface/auth';
+import { Input, Header, Button } from 'components';
 import { useValidateInput } from 'hooks';
 import { emailRegex, passwordRegex } from 'utils/constant';
-import { useSelector } from 'react-redux';
 
 const validInput = {
   identifier: {
@@ -67,13 +65,15 @@ export default function LoginScreen(): React.ReactElement {
 
   useEffect(() => {
     if (loginRes?.jwt) {
-      // router.replace('/');
+      router.replace('/');
     }
   }, [loginRes, router]);
 
   const onLogin = () => {
-    dispatchLogin({ identifier: form.identifier, password: form.password });
+    dispatchLogin(form);
   };
+
+  const notAllowSubmit = Object.keys(invalidMsg).length > 0;
 
   return (
     <ContainerModule withBottomTab={false}>
@@ -116,26 +116,9 @@ export default function LoginScreen(): React.ReactElement {
         </div>
         <div className="fixed w-full flex justify-center px-6 left-0 bottom-12">
           <div className="max-w-md w-full">
-            <button
-              type="button"
-              disabled={isLoading}
-              className={cx(
-                'w-full',
-                'rounded-xl',
-                isLoading ? 'bg-gray-400' : 'bg-[#1C6758]',
-                'flex',
-                'justify-center',
-                'items-center',
-                'h-12'
-              )}
-              onClick={onLogin}
-            >
-              {isLoading ? (
-                <Loader />
-              ) : (
-                <p className="font-semibold text-center text-white">Login</p>
-              )}
-            </button>
+            <Button isLoading={isLoading} onClick={onLogin} disabled={notAllowSubmit}>
+              Login
+            </Button>
             <div className="flex font-semibold text-sm mt-3 justify-center">
               <p className="mr-1">Do not have an Account?</p>
               <button type="button" className="text-[#1C6758]">

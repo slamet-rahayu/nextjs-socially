@@ -14,6 +14,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const reducer = {
   login: authReducer.loginReducer,
+  register: authReducer.registerReducer,
   auth: authReducer.authReducer
 };
 

@@ -3,7 +3,11 @@ export interface ILoginReq {
   password: string;
 }
 
-export interface ILoginRes {
+export interface IRegisterReq extends ILoginReq {
+  username: string;
+}
+
+export interface IAuthRes {
   jwt: string;
   user: {
     id: number;
@@ -17,7 +21,7 @@ export interface ILoginRes {
   };
 }
 
-export interface ILoginFailed {
+export interface IResFailed {
   data: null;
   error: {
     status: number;
@@ -31,7 +35,16 @@ export interface ILoginState {
   login: {
     isLoading: boolean;
     isError: boolean;
-    loginRes: ILoginRes;
-    loginFailed: ILoginFailed;
+    loginRes: IAuthRes;
+    loginFailed: IResFailed;
+  };
+}
+
+export interface IRegisterState {
+  register: {
+    isLoading: boolean;
+    isError: boolean;
+    registerRes: IAuthRes;
+    registerFailed: IResFailed;
   };
 }
