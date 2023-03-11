@@ -14,7 +14,7 @@ export async function loginApi(payload: ILoginReq): Promise<IAuthRes> {
 
 export async function registerApi(payload: IRegisterReq): Promise<IAuthRes> {
   try {
-    const { data } = await api.post(API.AUTH.login, payload);
+    const { data } = await api.post(API.AUTH.register, payload);
     return data;
   } catch (error: any) {
     throw error;

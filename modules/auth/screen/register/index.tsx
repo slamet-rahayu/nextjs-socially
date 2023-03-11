@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import ContainerModule from 'modules/container/screen/layout';
 import Header from 'components/header';
 import { IconButton } from '@mui/material';
@@ -19,7 +19,7 @@ const validInput = {
       required: 'Username is required'
     }
   },
-  identifier: {
+  email: {
     rules: {
       required: true,
       pattern: emailRegex
@@ -46,7 +46,7 @@ export default function RegisterScreen() {
   const router = useRouter();
   const [form, setForm] = useState({
     username: '',
-    identifier: '',
+    email: '',
     password: ''
   });
 
@@ -56,6 +56,9 @@ export default function RegisterScreen() {
   const { inputChange, invalidMsg } = useValidateInput(validInput);
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (registerFailed?.error?.message) {
+      clearRegisterState();
+    }
     const {
       target: { name, value }
     } = event;
@@ -70,6 +73,12 @@ export default function RegisterScreen() {
   const onRegister = () => {
     dispatchRegister(form);
   };
+
+  useEffect(() => {
+    if (registerRes?.jwt) {
+      router.replace('/');
+    }
+  }, [registerRes, router]);
 
   const nowAllowSubmit = Object.keys(invalidMsg).length > 0;
 
@@ -94,17 +103,17 @@ export default function RegisterScreen() {
               name="username"
               onChange={onInputChange}
               placeholder="your username"
-              invalidMsg={invalidMsg?.username}
+              invalidMsg={invalidMsg?.username || registerFailed?.error?.message}
             />
           </div>
           <div className="mb-6">
             <p className="mb-2 font-semibold text-sm">Email</p>
             <Input
               type="email"
-              name="identifier"
+              name="email"
               onChange={onInputChange}
               placeholder="susu@moo.com"
-              invalidMsg={invalidMsg?.identifier}
+              invalidMsg={invalidMsg?.email}
             />
           </div>
           <div className="mb-6">

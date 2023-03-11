@@ -3,8 +3,10 @@ export interface ILoginReq {
   password: string;
 }
 
-export interface IRegisterReq extends ILoginReq {
+export interface IRegisterReq {
   username: string;
+  email: string;
+  password: string;
 }
 
 export interface IAuthRes {

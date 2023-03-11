@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useLogin } from 'modules/auth/hooks';
 import { ILoginReq } from 'modules/auth/interface/auth';
 import { Input, Header, Button } from 'components';
+import Link from 'next/link';
 import { useValidateInput } from 'hooks';
 import { emailRegex, passwordRegex } from 'utils/constant';
 
@@ -121,9 +122,9 @@ export default function LoginScreen(): React.ReactElement {
             </Button>
             <div className="flex font-semibold text-sm mt-3 justify-center">
               <p className="mr-1">Do not have an Account?</p>
-              <button type="button" className="text-[#1C6758]">
-                Sign Up
-              </button>
+              <Link href="/sign-up" passHref>
+                <p className="text-[#1C6758]">Sign Up</p>
+              </Link>
             </div>
           </div>
         </div>
