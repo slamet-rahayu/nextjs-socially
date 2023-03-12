@@ -1,7 +1,8 @@
 import Header from 'components/header';
 import { ContainerModule } from 'modules/container/screen';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { Avatar } from '@mui/material';
+import { useGetProfile } from 'modules/profile/hooks';
 
 const summary = [
   {
@@ -19,6 +20,12 @@ const summary = [
 ];
 
 export default function ProfileMain(): ReactElement {
+  const { dispatchGetProfile, getProfileRes } = useGetProfile();
+
+  useEffect(() => {
+    dispatchGetProfile();
+  }, []);
+
   return (
     <ContainerModule>
       <Header title="My Profile" />

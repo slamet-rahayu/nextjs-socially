@@ -1,10 +1,12 @@
+/* eslint-disable import/no-cycle */
 import { configureStore } from '@reduxjs/toolkit';
 import { nextReduxCookieMiddleware, wrapMakeStore } from 'next-redux-cookie-wrapper';
 import { Store } from 'redux';
 import { createWrapper } from 'next-redux-wrapper';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import authReducer from 'modules/auth/auth-reducer';
-import { rootSaga } from 'modules/container/redux/sagas';
+import profileReducers from 'modules/profile/profile-reducer';
+import { rootSaga } from './sagas';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -13,23 +15,23 @@ export interface SagaStore extends Store {
 const sagaMiddleware = createSagaMiddleware();
 
 const reducer = {
-  login: authReducer.loginReducer,
-  register: authReducer.registerReducer,
-  auth: authReducer.authReducer
+  ...authReducer,
+  ...profileReducers
 };
 
+export const store = configureStore({
+  reducer,
+  devTools: process.env.NODE_ENV === 'development',
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().prepend(
+      nextReduxCookieMiddleware({
+        subtrees: ['auth']
+      }),
+      sagaMiddleware
+    )
+});
+
 export const makeStore = wrapMakeStore(() => {
-  const store = configureStore({
-    reducer,
-    devTools: process.env.NODE_ENV === 'development',
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().prepend(
-        nextReduxCookieMiddleware({
-          subtrees: ['auth']
-        }),
-        sagaMiddleware
-      )
-  });
   (store as SagaStore).sagaTask = sagaMiddleware.run(rootSaga);
   return store;
 });

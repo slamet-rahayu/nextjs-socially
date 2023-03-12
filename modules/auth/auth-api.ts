@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-useless-catch */
 import { api } from 'modules/container/api/instance';
 import { API } from 'utils/constant';

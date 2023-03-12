@@ -75,9 +75,9 @@ const authReducer = createReducer(authInitialState, (builder) => {
 });
 
 const authReducers = {
-  loginReducer,
-  registerReducer,
-  authReducer
+  login: loginReducer,
+  register: registerReducer,
+  auth: authReducer
 };
 
 export default authReducers;

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { ILoginReq, IAuthRes, IRegisterReq } from './interface/auth';
