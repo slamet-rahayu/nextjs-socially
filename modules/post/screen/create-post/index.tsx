@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React from 'react';
-import Header from 'components/header';
+// import Header from 'components/header';
 import cx from 'classnames';
-import { Add, Close } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
+import { Add } from '@mui/icons-material';
+// import { IconButton } from '@mui/material';
 import { ContainerModule } from 'modules/container/screen';
 
 export default function CreatePostComponent(): React.ReactElement {

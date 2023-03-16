@@ -6,6 +6,7 @@ import { createWrapper } from 'next-redux-wrapper';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import authReducer from 'modules/auth/auth-reducer';
 import profileReducers from 'modules/profile/profile-reducer';
+import postReducers from 'modules/post/post-reducer';
 import { rootSaga } from './sagas';
 
 export interface SagaStore extends Store {
@@ -16,7 +17,8 @@ const sagaMiddleware = createSagaMiddleware();
 
 const reducer = {
   ...authReducer,
-  ...profileReducers
+  ...profileReducers,
+  ...postReducers
 };
 
 export const store = configureStore({

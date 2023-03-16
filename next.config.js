@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 
-const BASE_API_URL = process.env.BASE_API_URL || 'http://google.com';
-
 const path = require('path')
 
 const nextConfig = {
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_API_URL,
+  },
   reactStrictMode: false,
   webpack(config, { dev, isServer }) {
     if (dev && !isServer) {
@@ -21,14 +22,6 @@ const nextConfig = {
     }
 
     return config
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/strapi/:path*',
-        destination: `${BASE_API_URL}/:path*`
-      }
-    ];
   },
   images: {
     domains: ['localhost']

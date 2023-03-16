@@ -5,3 +5,4 @@ export { default as Header } from './header';
 export { default as Input } from './input';
 export { default as CLink } from './Link';
 export { default as Loader } from './loader';
+export { default as Wrapper } from './wrapper';

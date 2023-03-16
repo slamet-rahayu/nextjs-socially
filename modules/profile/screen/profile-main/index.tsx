@@ -3,6 +3,7 @@ import { ContainerModule } from 'modules/container/screen';
 import { ReactElement, useEffect } from 'react';
 import { Avatar } from '@mui/material';
 import { useGetProfile } from 'modules/profile/hooks';
+import Skeleton from '@mui/material/Skeleton';
 
 const summary = [
   {
@@ -20,7 +21,7 @@ const summary = [
 ];
 
 export default function ProfileMain(): ReactElement {
-  const { dispatchGetProfile, getProfileRes } = useGetProfile();
+  const { dispatchGetProfile, getProfileRes, isLoading } = useGetProfile();
 
   useEffect(() => {
     dispatchGetProfile();
@@ -33,12 +34,16 @@ export default function ProfileMain(): ReactElement {
         <div className="flex items-center">
           <Avatar sx={{ width: '67px', height: '67px', mr: 2 }} />
           <div>
-            <p className="text-lg font-semibold">Amina Mark</p>
-            <p className="text-sm font-semibold">Jos, Pleteau</p>
+            <p className="text-lg font-semibold">
+              {isLoading ? <Skeleton width={120} height={35} /> : getProfileRes.fullname}
+            </p>
+            <p className="text-sm font-semibold">
+              {isLoading ? <Skeleton width={100} height={28} /> : getProfileRes.city}
+            </p>
           </div>
         </div>
         <p className="my-5 text-sm">
-          Tech sis | Writter | OAP Everywhere at once | Travelling | Not serious
+          {isLoading ? <Skeleton width={100} height={28} /> : getProfileRes.bio}
         </p>
         <button type="button" className="w-full py-3 rounded-xl bg-[#1C6758]">
           <p className="font-semibold text-center text-white">Edit Profile</p>

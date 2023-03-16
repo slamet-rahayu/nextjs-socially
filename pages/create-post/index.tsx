@@ -1,3 +1,3 @@
-import { CreatePostComponent } from 'modules/create-post/screen';
+import { CreatePostComponent } from 'modules/post/screen';
 
 export default CreatePostComponent;
