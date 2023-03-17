@@ -26,3 +26,8 @@ export interface IGetPostState {
     getPostFailed: IResFailed;
   };
 }
+
+export interface ICreatePost {
+  file: File;
+  caption: string;
+}
