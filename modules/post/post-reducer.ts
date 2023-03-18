@@ -1,8 +1,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 import { createReducer, PayloadAction } from '@reduxjs/toolkit';
-import { getPostSuccess, getPostFailed, getPostDone, getPost, getPostClear } from './post-actions';
-import { getPostInitialState } from './post-initial-state';
+import {
+  getPostSuccess,
+  getPostFailed,
+  getPostDone,
+  getPost,
+  getPostClear,
+  setPostProgress,
+  createPost,
+  createPostFailed,
+  createPostSuccess,
+  createPostDone,
+  createPostClear
+} from './post-actions';
+import { getPostInitialState, createPostInitialState } from './post-initial-state';
 
 const getPostReducer = createReducer(getPostInitialState, (builder) => {
   builder
@@ -24,8 +36,32 @@ const getPostReducer = createReducer(getPostInitialState, (builder) => {
     });
 });
 
+const createPostReducer = createReducer(createPostInitialState, (builder) => {
+  builder
+    .addCase(createPost, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(createPostSuccess, (state, action: PayloadAction<any>) => {
+      state.createPostRes = action.payload;
+    })
+    .addCase(createPostFailed, (state, action: PayloadAction<any>) => {
+      state.isError = true;
+      state.createPostFailed = action.payload;
+    })
+    .addCase(createPostDone, (state) => {
+      state.isLoading = false;
+    })
+    .addCase(createPostClear, (state) => {
+      state = createPostInitialState;
+    })
+    .addCase(setPostProgress, (state, action: PayloadAction<any>) => {
+      state.progress = action.payload;
+    });
+});
+
 const postReducers = {
-  getPost: getPostReducer
+  getPost: getPostReducer,
+  createPost: createPostReducer
 };
 
 export default postReducers;

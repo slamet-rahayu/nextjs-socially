@@ -36,7 +36,7 @@ export default function Button({
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="font-semibold text-center text-white">{children}</div>
+        <div className="font-semibold text-center text-white text-sm">{children}</div>
       )}
     </button>
   );

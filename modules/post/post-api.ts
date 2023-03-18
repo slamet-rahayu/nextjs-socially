@@ -2,7 +2,7 @@
 /* eslint-disable no-useless-catch */
 import { api } from 'modules/container/api/instance';
 import { API } from 'utils/constant';
-import { IGetPostResObj, ICreatePost } from './interface/post';
+import { IGetPostResObj } from './interface/post';
 
 export async function getPostApi(): Promise<IGetPostResObj> {
   try {
@@ -13,7 +13,7 @@ export async function getPostApi(): Promise<IGetPostResObj> {
   }
 }
 
-export async function createPostApi(payload: ICreatePost, onProgress: any): Promise<string> {
+export async function createPostApi(payload: FormData, onProgress: any): Promise<string> {
   try {
     const { data } = await api.post(API.POST.post, payload, { onDownloadProgress: onProgress });
     return data;

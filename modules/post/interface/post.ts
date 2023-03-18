@@ -27,6 +27,16 @@ export interface IGetPostState {
   };
 }
 
+export interface ICreatePostState {
+  createPost: {
+    isLoading: boolean;
+    isError: boolean;
+    createPostRes: IGetPostResObj[];
+    createPostFailed: IResFailed;
+    progress: number;
+  };
+}
+
 export interface ICreatePost {
   file: File;
   caption: string;

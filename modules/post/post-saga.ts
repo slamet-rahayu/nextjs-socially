@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import { call, put, takeLatest, take } from 'redux-saga/effects';
+import { call, put, takeLatest, take, fork } from 'redux-saga/effects';
 import { END, eventChannel } from 'redux-saga';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { ICreatePost, IGetPostResObj } from './interface/post';
@@ -34,15 +34,20 @@ const chan = eventChannel((emitter) => {
 
 function* watchOnProgress(chans: any) {
   while (true) {
-    const data = yield take(chans);
-    console.log(data);
-    yield put(setPostProgress({ progress: data }));
+    console.log('progress');
+    const data: any = yield take(chans);
+    console.log({ data });
+    yield put(setPostProgress(data));
   }
 }
 
 function* createPost(action: PayloadAction<ICreatePost>) {
   try {
-    const response: string = yield call(createPostApi, action.payload, (progressEvent: any) => {
+    const { payload } = action;
+    const formData = new FormData();
+    formData.append('file', payload.file);
+    formData.append('caption', payload.caption);
+    const response: string = yield call(createPostApi, formData, (progressEvent: any) => {
       const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
       emit(percentCompleted);
       if (percentCompleted === 100) {
@@ -51,6 +56,7 @@ function* createPost(action: PayloadAction<ICreatePost>) {
         emit(percentCompleted);
       }
     });
+    yield fork(watchOnProgress, chan);
     yield put(createPostSuccess(response));
   } catch (error: any) {
     yield put(createPostFailed(error.response.data));

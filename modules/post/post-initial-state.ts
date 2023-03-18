@@ -4,3 +4,11 @@ export const getPostInitialState = {
   getPostRes: [],
   getPostFailed: {}
 };
+
+export const createPostInitialState = {
+  isLoading: false,
+  isError: false,
+  createPostRes: '',
+  createPostFailed: {},
+  progress: 0
+};

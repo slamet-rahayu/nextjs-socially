@@ -25,7 +25,9 @@ export const store = configureStore({
   reducer,
   devTools: process.env.NODE_ENV === 'development',
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().prepend(
+    getDefaultMiddleware({
+      serializableCheck: false
+    }).prepend(
       nextReduxCookieMiddleware({
         subtrees: ['auth']
       }),
