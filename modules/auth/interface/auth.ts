@@ -33,6 +33,23 @@ export interface IResFailed {
   };
 }
 
+export interface IAuthState {
+  auth: {
+    userData: {
+      jwt: string;
+      user: {
+        id: string;
+        username: string;
+        email: string;
+        provider: string;
+        confirmed: string;
+        blocked: string;
+        createdAt: string;
+        updatedAt: string;
+      };
+    };
+  };
+}
 export interface ILoginState {
   login: {
     isLoading: boolean;

@@ -1,9 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 import Header from 'components/header';
 import { ContainerModule } from 'modules/container/screen';
 import { ReactElement, useEffect } from 'react';
 import { Avatar } from '@mui/material';
 import { useGetProfile } from 'modules/profile/hooks';
+import { useGetPost } from 'modules/post/hooks';
+import { useSelector } from 'react-redux';
 import Skeleton from '@mui/material/Skeleton';
+import { IAuthState } from 'modules/auth/interface/auth';
+import { baseURL } from 'utils/constant';
 
 const summary = [
   {
@@ -22,9 +27,24 @@ const summary = [
 
 export default function ProfileMain(): ReactElement {
   const { dispatchGetProfile, getProfileRes, isLoading } = useGetProfile();
+  const { isLoading: isLoadingPost, getPostRes, dispatchGetPost } = useGetPost();
+
+  const {
+    auth: {
+      userData: {
+        user: { id }
+      }
+    }
+  } = useSelector((state: IAuthState) => state);
+
+  useEffect(() => {
+    dispatchGetPost({ userId: id });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     dispatchGetProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -70,9 +90,13 @@ export default function ProfileMain(): ReactElement {
         <div className="pb-8">
           <p className="font-semibold mb-5">Post</p>
           <div className="flex flex-wrap m-[-5px]">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((v) => (
-              <div key={v} className="h-[99px] w-1/3 p-[5px]">
-                <div className="bg-gray-100 rounded-xl w-full h-full" />
+            {getPostRes.map((post) => (
+              <div key={post.id} className="w-1/3 p-[5px]">
+                <img
+                  className="rounded-xl"
+                  src={`${baseURL}${post.post[0].url}`}
+                  alt={post.caption}
+                />
               </div>
             ))}
           </div>

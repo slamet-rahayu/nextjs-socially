@@ -17,8 +17,6 @@ interface IInputValid {
   invalidMsg?: IInvalidMsg;
 }
 
-type RInputValid = Record<string, IInvalidMsg>;
-
 type TInputValid = Record<string, IInputValid>;
 
 type RChangeEvent = ChangeEvent<HTMLInputElement>;

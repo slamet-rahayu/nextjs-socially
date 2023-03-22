@@ -1,8 +1,8 @@
 /* eslint-disable import/no-cycle */
-import { call, put, takeLatest, take, fork } from 'redux-saga/effects';
+import { call, put, takeLatest, take, fork, ChannelTakeEffect } from 'redux-saga/effects';
 import { END, eventChannel } from 'redux-saga';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { ICreatePost, IGetPostResObj } from './interface/post';
+import { ICreatePost, IGetPostResObj, IGetPostParam } from './interface/post';
 import { getPostApi, createPostApi } from './post-api';
 import {
   getPostSuccess,
@@ -15,9 +15,9 @@ import {
 } from './post-actions';
 import { GET_POST, CREATE_POST } from './post-constant';
 
-function* getPost() {
+function* getPost(action: PayloadAction<IGetPostParam>) {
   try {
-    const response: IGetPostResObj = yield call(getPostApi);
+    const response: IGetPostResObj = yield call(getPostApi, action.payload);
     yield put(getPostSuccess(response));
   } catch (error: any) {
     yield put(getPostFailed(error.response.data));
@@ -34,9 +34,7 @@ const chan = eventChannel((emitter) => {
 
 function* watchOnProgress(chans: any) {
   while (true) {
-    console.log('progress');
-    const data: any = yield take(chans);
-    console.log({ data });
+    const data: ChannelTakeEffect<any> = yield take(chans);
     yield put(setPostProgress(data));
   }
 }
@@ -47,6 +45,7 @@ function* createPost(action: PayloadAction<ICreatePost>) {
     const formData = new FormData();
     formData.append('file', payload.file);
     formData.append('caption', payload.caption);
+    yield fork(watchOnProgress, chan);
     const response: string = yield call(createPostApi, formData, (progressEvent: any) => {
       const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
       emit(percentCompleted);
@@ -56,7 +55,6 @@ function* createPost(action: PayloadAction<ICreatePost>) {
         emit(percentCompleted);
       }
     });
-    yield fork(watchOnProgress, chan);
     yield put(createPostSuccess(response));
   } catch (error: any) {
     yield put(createPostFailed(error.response.data));

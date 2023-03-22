@@ -10,17 +10,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import { ContainerModule } from 'modules/container/screen';
 import { useCreatePost } from 'modules/post/hooks';
 import { Button } from 'components';
+import { useRouter } from 'next/router';
 
 export default function CreatePostComponent(): ReactElement {
   const [preview, setPreview] = useState<string>('');
   const [selectedfile, setSelectedFile] = useState<File>();
   const [caption, setCaption] = useState<string>('');
 
-  const { isLoading, isError, clearCreatePost, dispatchCreatePost } = useCreatePost();
+  const { isLoading, isError, createPostRes, clearCreatePost, dispatchCreatePost } =
+    useCreatePost();
 
-  useEffect(() => {
-    console.log({ isLoading, isError });
-  }, [isLoading, isError]);
+  const router = useRouter();
 
   const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event?.target?.files?.[0];
@@ -43,6 +43,17 @@ export default function CreatePostComponent(): ReactElement {
       dispatchCreatePost({ file: selectedfile, caption });
     }
   };
+
+  useEffect(() => {
+    clearCreatePost();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (createPostRes) {
+      router.replace('/');
+    }
+  }, [clearCreatePost, createPostRes, router]);
 
   return (
     <ContainerModule>

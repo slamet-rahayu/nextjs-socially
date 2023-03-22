@@ -10,7 +10,7 @@ export default function PostComponent() {
   const { isLoading, dispatchGetPost, getPostRes, isError } = useGetPost();
 
   useEffect(() => {
-    dispatchGetPost();
+    dispatchGetPost({});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

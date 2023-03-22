@@ -1,5 +1,10 @@
 import { IResFailed } from 'modules/auth/interface/auth';
 
+export interface IGetPostParam {
+  userId?: string;
+  postId?: string;
+}
+
 interface IpostImage {
   id: number;
   url: string;

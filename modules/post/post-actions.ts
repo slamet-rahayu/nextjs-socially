@@ -12,9 +12,9 @@ import {
   CREATE_POST_SUCCESS,
   CREATE_POST_DONE
 } from './post-constant';
-import { IGetPostResObj, ICreatePost } from './interface/post';
+import { IGetPostResObj, ICreatePost, IGetPostParam } from './interface/post';
 
-export const getPost = createAction(GET_POST);
+export const getPost = createAction<IGetPostParam>(GET_POST);
 export const getPostSuccess = createAction<IGetPostResObj | undefined>(GET_POST_SUCCESS);
 export const getPostFailed = createAction(GET_POST_FAILED);
 export const getPostDone = createAction(GET_POST_DONE);

@@ -2,11 +2,20 @@
 /* eslint-disable no-useless-catch */
 import { api } from 'modules/container/api/instance';
 import { API } from 'utils/constant';
-import { IGetPostResObj } from './interface/post';
+import qs from 'qs';
+import { IGetPostResObj, IGetPostParam } from './interface/post';
 
-export async function getPostApi(): Promise<IGetPostResObj> {
+export async function getPostApi({ userId, postId }: IGetPostParam): Promise<IGetPostResObj> {
   try {
-    const { data } = await api.get(API.POST.post);
+    const queryObj = {};
+    if (userId) {
+      Object.assign(queryObj, { userId });
+    }
+    if (postId) {
+      Object.assign(queryObj, { postId });
+    }
+    const query = qs.stringify(queryObj);
+    const { data } = await api.get(`${API.POST.post}?${query}`);
     return data;
   } catch (error) {
     throw error;
