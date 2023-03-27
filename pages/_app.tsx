@@ -36,7 +36,11 @@ function MyApp(props: AppPropsWithLayout) {
       {getLayout(
         <CacheProvider value={emotionCache}>
           <Head>
-            <meta name="viewport" content="initial-scale=1, width=device-width" />
+            <title>Socially</title>
+            <meta
+              name="viewport"
+              content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+            />
           </Head>
           <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

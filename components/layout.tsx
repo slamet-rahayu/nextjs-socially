@@ -8,7 +8,6 @@ import { Container } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Image from 'next/image';
 import Link from 'next/link';
-import MatoaLogo from 'public/matoa-logo.png';
 import styles from 'styles/components/layout.module.scss';
 import SearchIcon from 'public/search.svg';
 import checkAuth from 'hooks/utils/checkAuth';
@@ -73,9 +72,7 @@ function Header(): ReactElement {
       <Toolbar className={styles.toolbar} disableGutters>
         <Container maxWidth="lg">
           <Grid container>
-            <Grid item lg={4} alignItems="center" display="flex">
-              <Image src={MatoaLogo} alt="Matoa Indonesia" width={178} height={22} />
-            </Grid>
+            <Grid item lg={4} alignItems="center" display="flex" />
             <Grid item lg={4}>
               <NavLink />
             </Grid>

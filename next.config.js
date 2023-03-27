@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 
-const path = require('path')
+const path = require('path');
+
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  mode: 'production'
+});
 
 const nextConfig = {
   publicRuntimeConfig: {
@@ -28,4 +33,4 @@ const nextConfig = {
   }
 };
 
-module.exports = nextConfig;
+module.exports = withPWA(nextConfig);

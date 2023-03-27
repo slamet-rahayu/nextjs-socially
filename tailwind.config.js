@@ -6,7 +6,11 @@ module.exports = {
     './modules/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {}
+    extend: {},
+    fontFamily: {
+      display: ['Poppins', 'Roboto'],
+      body: ['Poppins', 'Roboto']
+    }
   },
   plugins: []
 };
