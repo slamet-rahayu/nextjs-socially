@@ -1,23 +1,17 @@
+import { useEffect } from 'react';
 import { ContainerModule } from 'modules/container/screen';
 import { StoryComponent, PostComponent } from 'modules/home/components';
 import { SearhBar } from 'components';
+import { useStartStopChannel } from 'modules/home/hooks';
 import { socket } from 'client/socket';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 export default function HomeComponent() {
+  const { dispatchStartChannel } = useStartStopChannel();
   useEffect((): any => {
-    socket.connect();
-
-    socket.emit('hello', 'bozo');
-
-    socket.on('hello', (res) => {
-      console.log({ res });
-    });
-
-    return () => {
-      socket.disconnect();
-    };
+    dispatchStartChannel();
   }, []);
+
   return (
     <>
       <SearhBar withNotification />

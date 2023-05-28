@@ -1,0 +1,2 @@
+export const START_CHANNEL = 'START_CHANNEL';
+export const STOP_CHANNEL = 'STOP_CHANNEL';
