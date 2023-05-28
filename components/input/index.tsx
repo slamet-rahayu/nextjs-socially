@@ -51,7 +51,7 @@ export default function Input({
           )}
         />
         {type === 'password' && (
-          <IconButton className="absolute right-3 top-1" onClick={toggleRevealPass}>
+          <IconButton className="!absolute right-1 top-1" onClick={toggleRevealPass}>
             {sType === 'password' ? <VisibilityIcon /> : <VisibilityOffIcon />}
           </IconButton>
         )}

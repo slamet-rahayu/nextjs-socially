@@ -1,7 +1,7 @@
 import { take, put, call, apply, delay, race } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import { connect } from 'client/socket';
-import { START_CHANNEL, STOP_CHANNEL } from '../home-constant';
+import { START_CHANNEL, STOP_CHANNEL } from './home-constant';
 
 function createSocketChannel(socket: any) {
   return eventChannel((emit) => {

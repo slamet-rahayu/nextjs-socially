@@ -2,13 +2,15 @@
 import Header from 'components/header';
 import { ContainerModule } from 'modules/container/screen';
 import { ReactElement, useEffect } from 'react';
-import { Avatar } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { useGetProfile } from 'modules/profile/hooks';
 import { useGetPost } from 'modules/post/hooks';
 import { useSelector } from 'react-redux';
 import Skeleton from '@mui/material/Skeleton';
 import { IAuthState } from 'modules/auth/interface/auth';
 import { baseURL } from 'utils/constant';
+import { MenuProfile } from 'modules/profile/components';
 
 const summary = [
   {
@@ -49,7 +51,7 @@ export default function ProfileMain(): ReactElement {
 
   return (
     <ContainerModule>
-      <Header title="My Profile" />
+      <Header title="My Profile" rightComponent={<MenuProfile />} />
       <div className="px-6 py-4 mt-10">
         <div className="flex items-center">
           <Avatar sx={{ width: '67px', height: '67px', mr: 2 }} />
